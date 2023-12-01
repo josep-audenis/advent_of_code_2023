@@ -1,0 +1,8 @@
+# Default ignored files
+/../../day2/aoc-d2/.idea/shelf/
+/../../day2/aoc-d2/.idea/workspace.xml
+# Editor-based HTTP Client requests
+/../../day2/aoc-d2/.idea/httpRequests/
+# Datasource local storage ignored files
+/../../day2/aoc-d2/.idea/dataSources/
+/../../day2/aoc-d2/.idea/dataSources.local.xml
