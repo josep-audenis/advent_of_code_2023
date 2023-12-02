@@ -13,24 +13,31 @@ public class Main {
     public static void main(String[] args) {
         int id;
         int idSum = 0;
+        int power = 0;
         char color;
         boolean valid = true;
         boolean two = false;
+        int red = 0;
+        int blue = 0;
+        int green = 0;
         List<String> lines;
         lines = readFromFile();
         String[] parts_id;
         String[] parts_cubs;
         String[] parts_games;
+        int number = 0;
         for (String line : lines){
-            System.out.print(line + " (");
+            System.out.print(line + " - ");
             parts_id = line.split(":");
             if (parts_id[0].length() > 6) {
                 id = Character.getNumericValue(parts_id[0].charAt(5))*10+Character.getNumericValue(parts_id[0].charAt(6));
             }
             else id = Character.getNumericValue(parts_id[0].charAt(5));
-            System.out.print(id + ") - ");
             parts_games = parts_id[1].split(";");
             valid = true;
+            red = 0;
+            blue = 0;
+            green = 0;
             for (String game : parts_games){
                 parts_cubs = game.split(",");
                 for (String cubs : parts_cubs){
@@ -42,32 +49,40 @@ public class Main {
                     }
                     switch (color){
                         case 'b':
-                            getNumber(two,cubs);
-                            if (getNumber(two,cubs) > MAX_BLUE) valid = false;
+                            number = getNumber(two,cubs);
+                            if (number > blue) blue = number;
+                            //if (number > MAX_BLUE) valid = false;
                             break;
                         case 'r':
-                            getNumber(two,cubs);
-                            if (getNumber(two,cubs) > MAX_RED) valid = false;
-                            if (Character.getNumericValue(cubs.charAt(2)) >= MAX_RED) valid = false;
+                            number = getNumber(two,cubs);
+                            if (number > red) red = number;
+                            //if (number > MAX_RED) valid = false;
                             break;
                         case 'g':
-
-                            if (getNumber(two,cubs) > MAX_GREEN) valid = false;
-                            if (Character.getNumericValue(cubs.charAt(2)) >= MAX_GREEN) valid = false;
+                            number = getNumber(two,cubs);
+                            if (number > green) green = number;
+                            //if (number > MAX_GREEN) valid = false;
                             break;
                         default:
                             System.out.println("T'has equivocat " + cubs +"(" + color + ")");
+                            break;
                     }
-                    if (!valid) break;
+                    //if (!valid) break;
                 }
-                if (!valid) break;
+                //if (!valid) break;
             }
+            /*
             if (valid){
                 idSum += id;
             }
             System.out.println(valid);
+             */
+            int total = (red*green*blue);
+            System.out.println("blue: " + blue + " green: " + green + " red: "+ red+ " total: " + total);
+            power += total;
         }
-        System.out.println(idSum);
+        System.out.println(power);
+        //System.out.println(idSum);
 
 
 
