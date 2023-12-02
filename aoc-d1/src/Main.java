@@ -29,10 +29,6 @@ public class Main {
     }
 
 
-    //el dificil dona 55686
-
-
-
     public static char findChar(String text, boolean forward, Map<String, String> dictionary) {
         String newText = "";
         String numberText = "";
