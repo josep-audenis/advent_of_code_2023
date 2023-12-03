@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         int number = 1;
+        int total = 0;
         int sum = 0;
         char[][] matrix = readFromFile();
         System.out.println(matrix.length);
@@ -23,24 +24,59 @@ public class Main {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (!Character.isDigit(matrix[i][j]) && !Character.isAlphabetic(matrix[i][j]) && matrix[i][j] != '.') {
-                    if (Character.isDigit(matrix[i][j - 1])) sum += findNumber(matrix, i, j - 1);
-                    if (Character.isDigit(matrix[i][j + 1])) sum += findNumber(matrix, i, j + 1);
-                    if (Character.isDigit(matrix[i - 1][j])) sum += findNumber(matrix, i - 1, j);
-                    else{
-                        if (Character.isDigit(matrix[i - 1][j - 1])) sum += findNumber(matrix, i - 1, j - 1);
-                        if (Character.isDigit(matrix[i - 1][j + 1])) sum += findNumber(matrix, i - 1, j + 1);
+                    if (Character.isDigit(matrix[i][j - 1])) {
+                        //sum += findNumber(matrix, i, j - 1);
+                        sum++;
+                        number *= findNumber(matrix, i, j - 1);
                     }
-                    if (Character.isDigit(matrix[i + 1][j])) sum += findNumber(matrix, i + 1, j);
-                    else{
-                        if (Character.isDigit(matrix[i + 1][j - 1])) sum += findNumber(matrix, i + 1, j - 1);
-                        if (Character.isDigit(matrix[i + 1][j + 1])) sum += findNumber(matrix, i + 1, j + 1);
+                    if (Character.isDigit(matrix[i][j + 1])) {
+                        //sum += findNumber(matrix, i, j + 1);
+                        sum++;
+                        number *= findNumber(matrix, i, j + 1);
                     }
-
+                    if (Character.isDigit(matrix[i - 1][j])) {
+                        //sum += findNumber(matrix, i - 1, j);
+                        sum++;
+                        number *= findNumber(matrix, i - 1, j);
+                    }
+                    else{
+                        if (Character.isDigit(matrix[i - 1][j - 1])){
+                            //sum += findNumber(matrix, i - 1, j - 1);
+                            sum++;
+                            number *= findNumber(matrix, i - 1, j - 1);
+                        }
+                        if (Character.isDigit(matrix[i - 1][j + 1])){
+                            //sum += findNumber(matrix, i - 1, j + 1);
+                            sum++;
+                            number *= findNumber(matrix, i - 1, j + 1);
+                        }
+                    }
+                    if (Character.isDigit(matrix[i + 1][j])){
+                        //sum += findNumber(matrix, i + 1, j);
+                        sum++;
+                        number *= findNumber(matrix, i + 1, j);
+                    }
+                    else{
+                        if (Character.isDigit(matrix[i + 1][j - 1])){
+                            //sum += findNumber(matrix, i + 1, j - 1);
+                            sum++;
+                            number *= findNumber(matrix, i + 1, j - 1);
+                        }
+                        if (Character.isDigit(matrix[i + 1][j + 1])) {
+                            //sum += findNumber(matrix, i + 1, j + 1);
+                            sum++;
+                            number *= findNumber(matrix, i + 1, j + 1);
+                        }
+                    }
+                    System.out.println( matrix[i][j] + " - " + sum);
+                    if (sum == 2) total += number;
+                    number = 1;
+                    sum = 0;
 
                 }
             }
         }
-        System.out.println(sum);
+        System.out.println(total);
     }
 
 
