@@ -28,7 +28,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "day2-hard",
+    "git-widget-placeholder": "day4-easy",
     "last_opened_file_path": "D:/ESTUDIS/SALLE/2N/paed/advent_of_code/aoc-d1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -47,6 +47,7 @@
       <updated>1701457469062</updated>
       <workItem from="1701457470123" duration="7000" />
       <workItem from="1701506097220" duration="5739000" />
+      <workItem from="1701590083302" duration="2326000" />
     </task>
     <servers />
   </component>
