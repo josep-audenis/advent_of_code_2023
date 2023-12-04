@@ -9,6 +9,7 @@ import java.util.List;
 public class Main {
 
     private static final String FILE_PATH = "input/input.txt";
+    private static final int SIZE = 10;
 
     public static void main(String[] args) {
         List<String> lines;
@@ -18,9 +19,14 @@ public class Main {
         String[] first;
         String[] second;
         int equals = 0;
-        int points = 0;
+        int sum = 0;
+        int actualCopies = 1;
         int[] winning;
         int[] played;
+        int[] copies = new int[SIZE];
+        for (int i = 0; i < SIZE; i++){
+            copies[i] = 1;
+        }
         for (String line: lines){
             equals = 0;
             initial = line.split(":");
@@ -34,10 +40,18 @@ public class Main {
                     if (number == compare) equals++;
                 }
             }
-            points += Math.pow(2,equals-1);
-
+            actualCopies = copies[0];
+            for (int i = 1; i < SIZE; i++){
+                copies[i-1] = copies[i];
+            }
+            copies[SIZE-1] = 1;
+            for (int i = 0; i < equals; i++){
+                copies[i] += actualCopies;
+            }
+            //sum += Math.pow(2,equals-1);
+            sum += actualCopies;
         }
-        System.out.println(points);
+        System.out.println(sum);
 
     }
 
