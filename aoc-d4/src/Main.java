@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
 
     private static final String FILE_PATH = "input/input.txt";
-    private static final int SIZE = 10;
+    private static final int SIZE = 10; // s'ha de canviar en funció dels numeros que hi hagi a la primera part,
 
     public static void main(String[] args) {
         List<String> lines;
@@ -40,6 +40,7 @@ public class Main {
                     if (number == compare) equals++;
                 }
             }
+
             actualCopies = copies[0];
             for (int i = 1; i < SIZE; i++){
                 copies[i-1] = copies[i];
@@ -52,7 +53,6 @@ public class Main {
             sum += actualCopies;
         }
         System.out.println(sum);
-
     }
 
     public static int[] getNumbersArray(String[] line){
