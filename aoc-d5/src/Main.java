@@ -1,71 +1,77 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     private static final String FILE_PATH = "input/input.txt";
 
     public static void main(String[] args) {
-        long arr[][];
-        int column = -1;
+        List<String> lines = readFromFile();
+        List<List<Long>> ranges = new ArrayList<>();
+        List<List<Long>> newRanges = new ArrayList<>();
+        List<Long> seeds = new ArrayList<>();
+        List<Long> mmRange;
+        List<Long> mmRangeLength;
+
         long destination = 0;
         long source = 0;
-        long range = 0;
-        long diference = 0;
-        int nSeeds = 0;
-        List<String> lines;
-        lines = readFromFile();
+        long rLength = 0;
+        long difference = 0;
+        long minValue = 0;
+
         String firstLine = lines.getFirst();
         String[] parts = firstLine.split(":");
-        parts = parts[1].split(" ");
-        nSeeds = parts.length-1;
-        arr = new long[nSeeds][8];
-        for (int i = 0; i < nSeeds;i++){
-            arr[i][0] = Long.parseLong(parts[i+1]);
-        }
-        for (String line : lines){
-            System.out.println(line);
-            if (!line.isEmpty() && Character.isAlphabetic(line.charAt(0))){
-                if (column > 0){
-                    arr = completeZeros(arr,nSeeds,column);
-                }
-                column++;
+        String[] seedString = parts[1].split(" ");
+        lines.remove(0);
 
-            }
-            else if (!line.isEmpty() && Character.isDigit(line.charAt(0))){
+        for(int i = 1; i < seedString.length; i++){
+            seeds.add(Long.parseLong(seedString[i]));
+        }
+        for (int i = 0; i < seeds.size(); i += 2){
+            ranges.add(Arrays.asList(seeds.get(i), seeds.get(i) + seeds.get(i+1)));
+        }
+
+        while (!lines.isEmpty()){
+            String line = lines.remove(0);
+            if (line.isEmpty()){
+                continue;
+            } else if (!Character.isAlphabetic(line.charAt(0))){
                 parts = line.split(" ");
                 destination = Long.parseLong(parts[0]);
                 source = Long.parseLong(parts[1]);
-                range = Long.parseLong(parts[2]);
-                diference = destination-source;
-                for (int i = 0; i < nSeeds; i++){
-                    if (arr[i][column-1] >= source && arr[i][column-1] <= source+range && arr[i][column] == 0){
-                        arr[i][column] = arr[i][column-1]+diference;
+                rLength = Long.parseLong(parts[2]);
+                difference = destination-source;
+                List<Long> convert = Arrays.asList(source, source+rLength);
+
+                for (int i = 0; i < ranges.size(); i++){
+                    final List<Long> current = ranges.get(i);
+                    if (source <= current.get(1) && source+rLength > current.get(0)){
+                        ranges.remove(i--);
+
+                        mmRange = Arrays.asList(Math.max(current.get(0), convert.get(0)),
+                                Math.min(current.get(1), convert.get(1)));
+                        mmRangeLength = Arrays.asList(mmRange.get(0) + difference, mmRange.get(1) + difference);
+
+                        newRanges.add(mmRangeLength);
+
+                        if (current.get(0) < mmRange.get(0)){
+                            ranges.add(Arrays.asList(current.get(0), mmRange.get(0) - 1));
+                        }
+                        if (current.get(1) > mmRange.get(1)){
+                            ranges.add(Arrays.asList(mmRange.get(1), current.get(1) - 1));
+                        }
                     }
                 }
+            } else {
+                ranges.addAll(newRanges);
+                newRanges.clear();
             }
-            for (int i = 0; i < nSeeds; i++){
-                for (int j = 0; j < 8; j++){
-                    System.out.print(arr[i][j] + " ");
-                }
-                System.out.println();
-            }
-            System.out.println("------------------");
-
         }
-        arr = completeZeros(arr,nSeeds,column);
-
-        System.out.println();
-        for (int i = 0; i < nSeeds; i++){
-            for (int j = 0; j < 8; j++){
-                System.out.print(arr[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("------------------");
-        System.out.println(lookForSmallest(arr,nSeeds));
-
+        ranges.addAll(newRanges);
+        System.out.println(ranges.stream().mapToLong(r -> r.get(0)).min());
     }
 
     public static List<String> readFromFile(){
@@ -76,20 +82,5 @@ public class Main {
             System.out.println("Can't open file :(");
             return null;
         }
-    }
-
-    public static long[][] completeZeros(long[][] arr, int nSeeds, int column){
-        for (int i = 0; i < nSeeds; i++){
-            if (arr[i][column] == 0) arr[i][column] = arr[i][column-1];
-        }
-        return arr;
-    }
-
-    public static long lookForSmallest(long[][] arr, int nSeeds){
-        long smallest = arr[0][7];
-        for (int i = 0; i < nSeeds; i++){
-            if (arr[i][7] < smallest) smallest = arr[i][7];
-        }
-        return smallest;
     }
 }
