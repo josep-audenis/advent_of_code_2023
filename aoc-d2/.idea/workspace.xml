@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e65945d5-f148-4a2d-89e9-6cb19194b68b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../untitled/input/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/untitled.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../aoc-d5/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../aoc-d5/src/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="e65945d5-f148-4a2d-89e9-6cb19194b68b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "day5-easy",
+    "git-widget-placeholder": "day5-hard",
     "last_opened_file_path": "D:/ESTUDIS/SALLE/2N/paed/advent_of_code/aoc-d1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
