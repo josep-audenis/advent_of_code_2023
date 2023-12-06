@@ -14,30 +14,44 @@ public class Main {
         List<String> last = (Arrays.asList(lines.get(1).split(":")));
         List<Integer> time = new ArrayList<>();
         List<Integer> distance = new ArrayList<>();
+
+        String at = "";
+        String ad = "";
+
         int total = 1;
         int beat;
-        int travel;
+        long travel;
+        long totalTime = 0;
+        long totalDistance = 0;
+
         first = new ArrayList<>(Arrays.asList(first.get(1).split(" ")));
         first.removeAll(Collections.singleton(""));
         last = new ArrayList<>(Arrays.asList(last.get(1).split(" ")));
         last.removeAll(Collections.singleton(""));
 
         for (int i = 0; i < first.size(); i++){
-            time.add(Integer.parseInt(first.get(i)));
-            distance.add(Integer.parseInt(last.get(i)));
+            //time.add(Integer.parseInt(first.get(i)));
+            ad += last.get(i);
+            at += first.get(i);
+            //distance.add(Integer.parseInt(last.get(i)));
         }
+        totalDistance = Long.parseLong(ad);
+        totalTime = Long.parseLong(at);
 
-        for (int i = 0; i < time.size();i++){
-            beat = 0;
-            for (int j = 0; j < time.get(i); j++){
-                travel = j*(time.get(i)-j);
-                System.out.println("travel: " + travel);
-                if (travel > distance.get(i)) beat++;
-                System.out.println("beat: " + beat);
-            }
-            System.out.println("total: " + total);
-            total *= beat;
+        System.out.println("d:" +totalDistance);
+        System.out.println("t" + totalTime);
+
+        //for (int i = 0; i < time.size();i++){
+        beat = 0;
+        for (long j = 0; j < totalTime; j++){
+            travel = j*(totalTime-j);
+            System.out.println("travel: " + travel);
+            if (travel > totalDistance) beat++;
+            System.out.println("beat: " + beat);
         }
+        System.out.println("total: " + total);
+        total *= beat;
+        //}
         System.out.println(total);
 
 
