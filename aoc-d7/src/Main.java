@@ -56,9 +56,7 @@ public class Main {
         return hands;
     }
 
-    private static boolean compareHands(List<String> hand1, List<String> hand2){
-        List<Integer> cards1 = new ArrayList<>();
-        List<Integer> cards2 = new ArrayList<>();
+    public static boolean compareHands(List<String> hand1, List<String> hand2){
         int first1 = 0;
         int first2 = 0;
         int firstJ1 = 0;
@@ -67,6 +65,8 @@ public class Main {
         int second2 = 0;
         int secondJ1 = 0;
         int secondJ2 = 0;
+        int index1 = 0;
+        int index2 = 0;
         List<String> cardValues = new ArrayList<>();
         cardValues.add("A");
         cardValues.add("K");
@@ -81,27 +81,37 @@ public class Main {
         cardValues.add("3");
         cardValues.add("2");
         cardValues.add("J");
-        for (int i = 0; i < cardValues.size(); i++){
+        for (int i = 0; i < cardValues.size()-1; i++){
             if (countOccurrences(hand1.getFirst(),cardValues.get(i)) > first1){
                 second1 = first1;
                 first1 = countOccurrences(hand1.getFirst(),cardValues.get(i));
             } else if (countOccurrences(hand1.getFirst(),cardValues.get(i)) > second1) second1 = (countOccurrences(hand1.getFirst(),cardValues.get(i)));
+            if ((countOccurrences(hand1.getFirst(),cardValues.get(i)) + countOccurrences(hand1.getFirst(),"J")) > firstJ1){
+                secondJ1 = firstJ1;
+                firstJ1 = countOccurrences(hand1.getFirst(),cardValues.get(i)) + countOccurrences(hand1.getFirst(),"J");
+            } else if ((countOccurrences(hand1.getFirst(),cardValues.get(i)) + countOccurrences(hand1.getFirst(),"J")) > secondJ1) secondJ1 = (countOccurrences(hand1.getFirst(),cardValues.get(i))) + countOccurrences(hand1.getFirst(),"J");
 
             if (countOccurrences(hand2.getFirst(),cardValues.get(i)) > first2){
                 second2 = first2;
                 first2 = countOccurrences(hand2.getFirst(),cardValues.get(i));
             } else if (countOccurrences(hand2.getFirst(),cardValues.get(i)) > second2) second2 = (countOccurrences(hand2.getFirst(),cardValues.get(i)));
+            if ((countOccurrences(hand2.getFirst(),cardValues.get(i)) + countOccurrences(hand2.getFirst(),"J")) > firstJ2){
+                secondJ2 = firstJ2;
+                firstJ2 = countOccurrences(hand2.getFirst(),cardValues.get(i)) + countOccurrences(hand2.getFirst(),"J");
+            } else if ((countOccurrences(hand2.getFirst(),cardValues.get(i)) + countOccurrences(hand2.getFirst(),"J")) > secondJ2) secondJ2 = (countOccurrences(hand2.getFirst(),cardValues.get(i))) + countOccurrences(hand2.getFirst(),"J");
 
         }
-        if (first1 < first2) return false;
-        else if (first1 > first2) return true;
-        else if (second1 < second2) return false;
-        else if (second1 > second2) return true;
-        else{
-                for (int i = 0; i < hand1.getFirst().length(); i++){
-                    if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) > cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return false;
-                    else if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) < cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return true;
-                }
+        if (firstJ1 < firstJ2) return false;
+        else if (firstJ1 > firstJ2) return true;
+        else if (firstJ1 < 4 && second1 < second2) return false;
+        else if (firstJ1 < 4 && second1 > second2) return true;
+        else {
+            for (int i = 0; i < hand1.getFirst().length(); i++){
+                index1 = cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i)));
+                index2 = cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)));
+                if (index1 > index2) return false;
+                else if (index1 < index2) return true;
+            }
         }
         return false;
     }
