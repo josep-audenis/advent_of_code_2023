@@ -71,6 +71,7 @@ public class Main {
         cardValues.add("A");
         cardValues.add("K");
         cardValues.add("Q");
+        cardValues.add("J");
         cardValues.add("T");
         cardValues.add("9");
         cardValues.add("8");
@@ -80,7 +81,6 @@ public class Main {
         cardValues.add("4");
         cardValues.add("3");
         cardValues.add("2");
-        cardValues.add("J");
         for (int i = 0; i < cardValues.size(); i++){
             if (countOccurrences(hand1.getFirst(),cardValues.get(i)) > first1){
                 second1 = first1;
@@ -98,10 +98,10 @@ public class Main {
         else if (second1 < second2) return false;
         else if (second1 > second2) return true;
         else{
-                for (int i = 0; i < hand1.getFirst().length(); i++){
-                    if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) > cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return false;
-                    else if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) < cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return true;
-                }
+            for (int i = 0; i < hand1.getFirst().length(); i++){
+                if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) > cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return false;
+                else if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) < cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return true;
+            }
         }
         return false;
     }
