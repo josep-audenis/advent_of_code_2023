@@ -98,10 +98,10 @@ public class Main {
         else if (second1 < second2) return false;
         else if (second1 > second2) return true;
         else{
-            for (int i = 0; i < hand1.getFirst().length(); i++){
-                if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) > cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return false;
-                else if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) < cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return true;
-            }
+                for (int i = 0; i < hand1.getFirst().length(); i++){
+                    if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) > cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return false;
+                    else if (cardValues.indexOf(String.valueOf(hand1.get(0).charAt(i))) < cardValues.indexOf(String.valueOf(hand2.get(0).charAt(i)))) return true;
+                }
         }
         return false;
     }
