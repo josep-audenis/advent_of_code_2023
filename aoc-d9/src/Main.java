@@ -35,6 +35,7 @@ public class Main {
             }while(!end);
             for (int i = 1; i < sequence.size()+1; i++){
                 //prediction += sequence.get(sequence.size()-i).getLast();
+                prediction = sequence.get(sequence.size()-i).getFirst() - prediction;
             }
             sum += prediction;
             prediction = 0;
