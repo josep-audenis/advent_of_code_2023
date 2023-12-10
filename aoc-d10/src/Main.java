@@ -24,7 +24,7 @@ public class Main {
                     cords[0] = i;
                     cords[1] = j;
                     found = true;
-                    System.out.println(Arrays.toString(cords));
+                    //System.out.println(Arrays.toString(cords));
                     break;
                 }
             }
@@ -72,29 +72,69 @@ public class Main {
             }
         }
         int cows = 0;
-        System.out.println(search1);
-        System.out.println(search2);
+        //System.out.println(search1);
+        //System.out.println(search2);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + "[" + i + "][" + j + "] ");
-
+                if (matrix[0][j] == '.') matrix[0][j] = 'o';
+                if (matrix[j][0] == '.') matrix[j][0] = 'o';
+                if (matrix[matrix.length-1][j] == '.') matrix[matrix.length-1][j] = 'o';
+                if (matrix[j][matrix[j].length-1] ==  '.') matrix[j][matrix[j].length-1] = 'o';
+                //System.out.print(matrix[i][j] + "[" + i+ "][" + j + "] ");
+                change = true;
+                if (matrix[i][j] == '.'){
+                    if (matrix[i-1][j-1] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i-1][j] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i-1][j+1] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i][j-1] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i][j] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i][j+1] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i+1][j-1] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i+1][j] == 'o'){
+                        change = false;
+                    }
+                    if (matrix[i+1][j+1] == 'o'){
+                        change = false;
+                    }
+                    if (change){
+                        matrix[i][j] = 'I';
+                        cows++;
+                    }else{
+                        matrix[i][j] = 'o';
+                    }
+                }
             }
         }
+
         found = false;
         int count = 1;
         do {
-            nextCoords(matrix, search1);
-            nextCoords(matrix, search2);
+            nextCoords(matrix,search1);
+            nextCoords(matrix,search2);
             count++;
-            System.out.println(search1);
-            System.out.println(search2);
-            System.out.println(count);
-            if (search1.get(search1.size() - 1).equals(search2.get(search2.size() - 1))) {
+            //System.out.println(search1);
+            //System.out.println(search2);
+            //System.out.println(count);
+            if (search1.get(search1.size() - 1).equals(search2.get(search2.size() - 1))){
                 found = true;
             }
         } while (!found);
-        System.out.println();
-
+        System.out.println(count);
+        System.out.println(cows);
     }
 
     public static char[][] readFromFile() {
@@ -147,7 +187,7 @@ public class Main {
                 if (actual[0] > prev[0]){
                     temp.add(actual[0]+1);
                     temp.add(actual[1]);
-                    }else {
+                }else {
                     temp.add(actual[0] - 1);
                     temp.add(actual[1]);
                 }
