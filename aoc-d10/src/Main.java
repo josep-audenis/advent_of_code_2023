@@ -80,7 +80,7 @@ public class Main {
                 if (matrix[j][0] == '.') matrix[j][0] = 'o';
                 if (matrix[matrix.length-1][j] == '.') matrix[matrix.length-1][j] = 'o';
                 if (matrix[j][matrix[j].length-1] ==  '.') matrix[j][matrix[j].length-1] = 'o';
-                //System.out.print(matrix[i][j] + "[" + i+ "][" + j + "] ");
+                System.out.print(matrix[i][j] + "[" + i+ "][" + j + "] ");
                 change = true;
                 if (matrix[i][j] == '.'){
                     if (matrix[i-1][j-1] == 'o'){
@@ -118,6 +118,7 @@ public class Main {
                     }
                 }
             }
+            System.out.println();
         }
 
         found = false;
