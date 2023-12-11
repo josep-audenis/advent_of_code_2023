@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    private static final String FILE_PATH = "input/input.txt";
+    private static final String FILE_PATH = "input/david.txt";
 
     public static void main(String[] args) {
         char[][] matrix = readFromFile();
@@ -35,12 +35,14 @@ public class Main {
         temp.add(cords[1]);
         search1.add(temp);
         search2.add(temp);
+        //DRETA
         if (cords[1] < matrix[cords[1]].length-1 && (matrix[cords[0]][cords[1] + 1] == '-' || matrix[cords[0]][cords[1] + 1] == '7' || matrix[cords[0]][cords[1] + 1] == 'J')) {
             temp = new ArrayList<>();
             temp.add(cords[0]);
             temp.add(cords[1]+1);
             search1.add(temp);
         }
+        //ABAIX
         if (cords[0] < matrix.length-1 && (matrix[cords[0] + 1][cords[1]] == '|' || matrix[cords[0] + 1][cords[1]] == 'L' || matrix[cords[0] + 1][cords[1]] == 'J')) {
             temp = new ArrayList<>();
             temp.add(cords[0]+1);
@@ -51,16 +53,18 @@ public class Main {
                 search2.add(temp);
             }
         }
+        //ESQUERRA
         if (cords[1] > 0 && (matrix[cords[0]][cords[1] - 1] == '-' || matrix[cords[0]][cords[1] - 1] == 'F' || matrix[cords[0]][cords[1] - 1] == 'L')) {
             temp = new ArrayList<>();
             temp.add(cords[0]);
-            temp.add(cords[1]+1);
+            temp.add(cords[1]-1);
             if (search1.size() == 1) {
                 search1.add(temp);
             } else {
                 search2.add(temp);
             }
         }
+        //ADALT
         if (cords[0] > 0 && (matrix[cords[0] - 1][cords[1]] == '|' || matrix[cords[0] - 1][cords[1]] == 'F' || matrix[cords[0] - 1][cords[1]] == '7')) {
             temp = new ArrayList<>();
             temp.add(cords[0]-1);
@@ -72,8 +76,6 @@ public class Main {
             }
         }
         int cows = 0;
-        //System.out.println(search1);
-        //System.out.println(search2);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (matrix[0][j] == '.') matrix[0][j] = 'o';
@@ -127,9 +129,6 @@ public class Main {
             nextCoords(matrix,search1);
             nextCoords(matrix,search2);
             count++;
-            //System.out.println(search1);
-            //System.out.println(search2);
-            //System.out.println(count);
             if (search1.get(search1.size() - 1).equals(search2.get(search2.size() - 1))){
                 found = true;
             }
