@@ -64,8 +64,8 @@ public class Main {
             diferencex = galaxiesTemp.get(i).get(0) - originalGalaxies.get(i).get(0);
             diferencey = galaxiesTemp.get(i).get(1) - originalGalaxies.get(i).get(1);
             List<Integer> cords = new ArrayList<>();
-            cords.add(originalGalaxies.get(i).get(0) + Math.abs(diferencex));
-            cords.add(originalGalaxies.get(i).get(1) + Math.abs(diferencey));
+            cords.add(originalGalaxies.get(i).get(0) + Math.abs(diferencex)*999999);
+            cords.add(originalGalaxies.get(i).get(1) + Math.abs(diferencey)*999999);
             galaxiesEnd.add(cords);
         }
         for (int i = 0; i < galaxiesEnd.size()-1; i++){
@@ -76,7 +76,7 @@ public class Main {
         }
         System.out.println(sum);
     }
-    
+
     public static List<List<Character>> readFromFile() {
         List<List<Character>> mat = new ArrayList<>();
         String rawLines = "";
