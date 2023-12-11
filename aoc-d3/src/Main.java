@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
-    private static final String FILE_PATH = "input/input.txt";
+    private static final String FILE_PATH = "input/dia3.txt";
 
     public static void main(String[] args) {
         int number = 1;
