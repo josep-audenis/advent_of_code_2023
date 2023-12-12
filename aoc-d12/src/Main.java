@@ -9,25 +9,33 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH = "input/input.txt";
+    private static final String FILE_PATH = "input/input(.txt";
 
     public static void main(String[] args) {
-        int sum = 0;
+        long sum = 0;
         List<String> lines = readFromFile();
         for (String line : lines) {
-            int pos = 0;
+            long pos = 0;
             String[] splited = line.split(" ");
             String spring = splited[0];
-            
-            int[] nums = new int[splited[1].split(",").length];
-            for (int i = 0; i < splited[1].split(",").length; i++) {
-                int num = Integer.parseInt(splited[1].split(",")[i]);
-                nums[i] = num;
+            for(int i = 0; i < 4; i++){
+                spring += "?";
+                spring += splited[0];
             }
-            //System.out.print(spring + " - ");
+            int size = splited[1].split(",").length;
+            int[] nums = new int[size * 5];
+            for (int i = 0; i < size*5; i++) {
+                for (int j = 0; j < size; j++){
+                    int num = Integer.parseInt(splited[1].split(",")[j]);
+                    nums[i] = num;
+                    if (i < (size*5)-1 && j != size-1) i++;
+                }
+            }
+            System.out.print(spring + " - ");
             for (int num : nums) {
-                //System.out.print(num + ",");
+                System.out.print(num + ",");
             }
+            System.out.println();
             pos = cercaDinamica(0, 0, spring, nums, new HashMap<>());
             //System.out.println( " = " + pos);
             sum += pos;
@@ -45,8 +53,8 @@ public class Main {
         }
     }
 
-    public static int cercaDinamica(int p, int f, String cadena, int[] nums, Map<String, Integer> map){
-        int res = 0;
+    public static long cercaDinamica(int p, int f, String cadena, int[] nums, Map<String, Long> map){
+        long res = 0;
         String key;
         if (p >= cadena.length()){
             if (f == nums.length) return 1;
