@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    private static final String FILE_PATH = "input/david.txt";
+    private static final String FILE_PATH = "input/input.txt";
 
     public static void main(String[] args) {
         char[][] matrix = readFromFile();
